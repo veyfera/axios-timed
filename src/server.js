@@ -7,19 +7,20 @@ const MAX_DELAY = 15;
 
 const todo = [];
 
-function sleep(ms){
-    const st = new Date()
-    let ct = 0;
-        do {
-            //console.log('waiting...')
-        } while (Date.now()-st< ms)
-    //return new Promise(res => setTimeout(res, ms));
+async function sleep(ms){
+    //const st = new Date()
+    //let ct = 0;
+        //do {
+            ////console.log('waiting...')
+        //} while (Date.now()-st< ms)
+    return new Promise(res => setTimeout(res, ms));
 }
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
         const rndTime = Math.random() * (MAX_DELAY - MIN_DELAY) + MIN_DELAY;
         
-        sleep(rndTime);
+        console.log("waiting for " + rndTime + " seconds");
+        await sleep(rndTime * 1000);
         res.send(`hello work ${rndTime}`)
 })
 
